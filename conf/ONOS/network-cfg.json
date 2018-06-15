@@ -1,0 +1,96 @@
+{
+    "ports" : {
+  "of:0000000000000102/3" : {
+      "interfaces" : [
+    {
+        "ips" : [ "10.1.100.11/24" ],
+        "mac" : "00:00:00:00:01:80",
+        "vlan": "-1"
+    }
+      ]
+  },
+  "of:0000000000000102/4" : {
+      "interfaces" : [
+    {
+        "ips" : [ "10.1.100.12/24" ],
+        "mac" : "00:00:00:00:01:80",
+        "vlan": "-1"
+    }
+      ]
+  },
+
+  "of:0000000000000103/3" : {
+      "interfaces" : [
+    {
+        "ips" : [ "10.1.101.11/24" ],
+        "mac" : "00:00:00:00:02:80",
+        "vlan": "-1"
+    }
+      ]
+  },
+  "of:0000000000000103/4" : {
+      "interfaces" : [
+    {
+        "ips" : [ "10.1.101.12/24" ],
+        "mac" : "00:00:00:00:02:80",
+        "vlan": "-1"
+    }
+      ]
+  }
+    },
+
+    "devices" : {
+        "of:0000000000000100" : {
+        	"basic" : {
+				"driver" : "ofdpa-cpqd"
+	   		},
+            "segmentrouting" : {
+                "name" : "Sw0",
+                "nodeSid" : 100,
+                "routerIp" : "192.168.0.33",
+                "routerMac" : "00:00:01:00:33:80",
+                "isEdgeRouter" : false,
+                "adjacencySids" : []
+            }
+        },
+        "of:0000000000000101" : {
+        	"basic" : {
+				"driver" : "ofdpa-cpqd"
+	   		},
+            "segmentrouting" : {
+                "name" : "Sw1",
+                "nodeSid" : 101,
+                "routerIp" : "192.168.0.44",
+                "routerMac" : "00:00:01:00:44:80",
+                "isEdgeRouter" : false,
+                "adjacencySids" : []
+            }
+        },
+        "of:0000000000000102" : {
+        	"basic" : {
+				"driver" : "ofdpa-cpqd"
+	   		},
+            "segmentrouting" : {
+                "name" : "Sw2",
+                "nodeSid" : 102,
+                "routerIp" : "10.1.100.1",
+                "routerMac" : "00:00:10:00:02:01",
+                "isEdgeRouter" : true,
+                "adjacencySids" : []
+            }
+        },
+        "of:0000000000000103" : {
+        	"basic" : {
+				"driver" : "ofdpa-cpqd"
+	   		},
+            "segmentrouting" : {
+                "name" : "Sw3",
+                "nodeSid" : 103,
+                "routerIp" : "10.1.101.1",
+                "routerMac" : "00:00:10:00:03:01",
+                "isEdgeRouter" : true,
+                "adjacencySids" : []
+            }
+        }
+    }
+}

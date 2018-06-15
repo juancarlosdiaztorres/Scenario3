@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+~~~~~~~~~~~~~~~~~~~~
+Scenario1 VNX
+~~~~~~~~~~~~~~~~~~~~
+
+Name:        Scenario1
+Description: 	This is an easy configuration for the deployment of a SDN. 
+				The estructure is based on a Leaf-Spine configuration of OpenFlow switches. 
+				It allows to simulate a Software Defined DataCenter meanwhile getting started with ONOS Controller and SDN.
+
+This file is part of a TFG.
+jcdiaztorres96@gmail.com
+
+Juan Carlos Díaz Torres
+Universidad Politecnica de Madrid
+SPAIN
+
+-->
+
+<vnx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="/usr/share/xml/vnx/vnx-2.00.xsd">
+  <global>
+    <version>2.0</version>
+    <scenario_name>Scenario2</scenario_name>
+    <automac offset="5"/>
+    <vm_mgmt type="none" />
+    <!--vm_mgmt type="private" network="10.250.0.0" mask="24" offset="16">
+       <host_mapping />
+    </vm_mgmt-->
+    <vm_defaults>
+      <console id="0" display="no"/>
+      <console id="1" display="yes"/>
+    </vm_defaults>
+    <!--<netconfig stp="on"/>-->
+  </global>
+
+
+  <!-- NET DEFINITION -->
+
+  <!-- virbr0 (192.168.122.0/24) -->
+  <net name="virbr0" mode="virtual_bridge" managed="no"/>
+  <!-- NetMgt (10.100.0.0/24) -->
+  <net name="Net_ctrl" mode="virtual_bridge"/>
+
+  <!-- SWITCHES OPENFLOW -->
+  <net name="Sw0" mode="openvswitch" hwaddr="00:00:00:00:01:00" controller='tcp:10.100.11.1:6633' of_version="OpenFlow13" fail_mode='secure' >
+    <connection name='0_2' net='Sw2'></connection>
+	<connection name='0_3' net='Sw3'> </connection>
+<!--     <connection name='0_4' net='Sw4'> </connection>
+    <connection name='0_5' net='Sw5'> </connection> -->
+  </net>
+
+
+  <net name="Sw1" mode="openvswitch" hwaddr="00:00:00:00:01:01" controller='tcp:10.100.11.1:6633' of_version="OpenFlow13" fail_mode='secure' >
+    <connection name='1_2' net='Sw2'></connection>
+    <connection name='1_3' net='Sw3'></connection>
+  <!--   <connection name='1_4' net='Sw4'></connection>
+    <connection name='1_5' net='Sw5'> </connection> -->
+  </net> 
+
+  <net name="Sw2" mode="openvswitch" hwaddr="00:00:00:00:01:02" controller='tcp:10.100.11.1:6633' of_version="OpenFlow13" fail_mode='secure'>
+  </net>
+
+  <net name="Sw3" mode="openvswitch" hwaddr="00:00:00:00:01:03" controller='tcp:10.100.11.1:6633' of_version="OpenFlow13" fail_mode='secure'>
+  </net>
+  
+  <!-- <net name="Sw4" mode="openvswitch" hwaddr="00:00:00:00:01:04" controller='tcp:10.100.11.1:6633' of_version="OpenFlow13" fail_mode='secure'>
+  </net>
+
+   <net name="Sw5" mode="openvswitch" hwaddr="00:00:00:00:01:05" controller='tcp:10.100.11.1:6633' of_version="OpenFlow13" fail_mode='secure'>
+  </net> -->
+
+
+ <!-- ONOS -->
+  <vm name="ONOS" type="lxc" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx//filesystems/vnx_rootfs_lxc_ubuntu64-18.04-v025-onos-1.12.0</filesystem>
+    <if id="1" net="Net_ctrl">
+      <ipv4>10.100.11.1/24</ipv4>
+  	</if>
+  	<if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+  	
+  	<!-- Copy configuration files -->
+	<!--<filetree seq="on_boot" root="/root/conf/">/home/coit/Desktop/TFG/conf/ONOS/</filetree>-->
+	 <!-- Copy configuration files -->
+    <filetree seq="on_boot" root="/root/conf/">conf/ONOS/start-ONOS.sh</filetree>
+    <filetree seq="on_boot" root="/opt/onos/">conf/ONOS/options</filetree>
+    <filetree seq="on_boot" root="/opt/onos/config/network-cfg.json">conf/ONOS/network-cfg.json</filetree>
+    <filetree seq="on_boot" root="/root/conf/">conf/ONOS/net-cfg.json</filetree>
+    <filetree seq="on_boot" root="/root/conf/">conf/ONOS/config-ONOS_ipv4.sh</filetree>
+
+
+	<!-- Configure and Start ONOS (IPv4) -->
+    <exec seq="config-ONOS" type="verbatim">
+        echo 'alias onos-client=/opt/onos/karaf/bin/client' >> /root/.bashrc
+        /root/conf/start-ONOS.sh
+    </exec>
+    
+</vm>
+
+
+
+
+<!-- ROUTER -->
+<!-- ROUTER R101 -->
+<!--   <vm name="R-101" type="lxc" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx//filesystems/vnx_rootfs_lxc_ubuntu64-18.04-v025-onos-1.12.0</filesystem>
+    <if id="1" net="Sw4">
+      <ipv4>10.1.102.2/24</ipv4>
+    </if>
+    <if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+    Enable IP forwarding in this node
+    <forwarding type="ip"/>
+    <route type="ipv4" gw="10.1.102.1">10.1.100.0/24</route>   
+    <route type="ipv4" gw="10.1.102.1">10.1.101.0/24</route>   
+    <filetree seq="on_boot" root="/root/">conf/hosts</filetree>
+    <exec seq="on_boot" type="verbatim">
+        cat /root/hosts >> /etc/hosts;
+        rm /root/hosts;
+    </exec>
+</vm> -->
+
+
+
+
+  <!-- NODES -->
+  <vm name="h1" type="lxc" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-18.04-v025-onos-1.12.0</filesystem>
+    <if id="1" net="Sw2" >
+      <ipv4>10.1.100.11/24</ipv4>
+    </if>
+    <route type="ipv4" gw="10.1.100.1">default</route>   
+    <filetree seq="on_boot" root="/root/">conf/hosts</filetree>
+    <exec seq="on_boot" type="verbatim">
+        cat /root/hosts >> /etc/hosts;
+        rm /root/hosts;
+    </exec>
+  </vm>
+
+  <vm name="h2" type="lxc" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-18.04-v025-onos-1.12.0</filesystem>
+    <if id="1" net="Sw2" >
+      <ipv4>10.1.100.12/24</ipv4>
+    </if>
+    <route type="ipv4" gw="10.1.100.1">default</route>   
+    <filetree seq="on_boot" root="/root/">conf/hosts</filetree>
+    <exec seq="on_boot" type="verbatim">
+        cat /root/hosts >> /etc/hosts;
+        rm /root/hosts;
+    </exec>
+  </vm>
+
+  <vm name="h3" type="lxc" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-18.04-v025-onos-1.12.0</filesystem>
+    <if id="1" net="Sw3" >
+      <ipv4>10.1.101.11/24</ipv4>
+    </if>
+    <route type="ipv4" gw="10.1.101.1">default</route>   
+    <filetree seq="on_boot" root="/root/">conf/hosts</filetree>
+    <exec seq="on_boot" type="verbatim">
+        cat /root/hosts >> /etc/hosts;
+        rm /root/hosts;
+    </exec>
+  </vm>
+
+  <vm name="h4" type="lxc" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-18.04-v025-onos-1.12.0</filesystem>
+    <if id="1" net="Sw3" >
+      <ipv4>10.1.101.12/24</ipv4>
+    </if>
+    <route type="ipv4" gw="10.1.101.1">default</route>   
+    <filetree seq="on_boot" root="/root/">conf/hosts</filetree>
+    <exec seq="on_boot" type="verbatim">
+        cat /root/hosts >> /etc/hosts;
+        rm /root/hosts;
+    </exec>
+  </vm>
+<!-- 
+   <vm name="h5" type="lxc" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-18.04-v025-onos-1.12.0</filesystem>
+    <if id="1" net="Sw5" >
+      <ipv4>10.1.103.11/24</ipv4>
+    </if>
+    <route type="ipv4" gw="10.1.103.1">default</route>   
+    <filetree seq="on_boot" root="/root/">conf/hosts</filetree>
+    <exec seq="on_boot" type="verbatim">
+        cat /root/hosts >> /etc/hosts;
+        rm /root/hosts;
+    </exec>
+  </vm>
+
+   <vm name="h6" type="lxc" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-18.04-v025-onos-1.12.0</filesystem>
+    <if id="1" net="Sw5" >
+      <ipv4>10.1.103.12/24</ipv4>
+    </if>
+    <route type="ipv4" gw="10.1.103.1">default</route>   
+    <filetree seq="on_boot" root="/root/">conf/hosts</filetree>
+    <exec seq="on_boot" type="verbatim">
+        cat /root/hosts >> /etc/hosts;
+        rm /root/hosts;
+    </exec>
+  </vm> -->
+
+  <host>
+        <hostif net="Net_ctrl">
+            <ipv4>10.100.11.3/24</ipv4>
+        </hostif>
+        <!--<route type="ipv4" gw="10.100.11.2">10.100.1.0/24</route>
+        <route type="ipv4" gw="10.100.11.2">10.100.2.0/24</route>
+        <route type="ipv4" gw="10.100.11.2">10.100.3.0/24</route>
+        <exec seq="config-extrouter" type="verbatim">
+            vnx_config_nat netmgt enp0s3
+        </exec>-->
+  </host>
+
+
+</vnx>
