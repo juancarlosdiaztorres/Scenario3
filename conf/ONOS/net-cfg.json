@@ -1,122 +1,39 @@
 {
-    "ports" : {
-  "of:0000000000000102/3" : {
-      "interfaces" : [
-    {
-        "ips" : [ "10.0.1.254/24" ],
-        "mac" : "00:00:00:00:01:80",
-        "vlan": "-1"
-    }
-      ]
-  },
-  "of:0000000000000102/4" : {
-      "interfaces" : [
-    {
-        "ips" : [ "10.0.1.254/24" ],
-        "mac" : "00:00:00:00:01:80",
-        "vlan": "-1"
-    }
-      ]
+
+  "devices":{
+   "of:0000000000000011":{ "basic":{ "name":"Net0", "latitude":35,"longitude":-100 } },
+   "of:0000000000000012":{ "basic":{ "name":"Net1", "latitude":35,"longitude":-90  } },
+   "of:0000000000000013":{ "basic":{ "name":"Net2", "latitude":35,"longitude":-90  } },
+   "of:0000000000000021":{ "basic":{ "name":"Net3", "latitude":40,"longitude":-100 } },
+   "of:0000000000000022":{ "basic":{ "name":"Net4", "latitude":40,"longitude":-90  } }
   },
 
-  "of:0000000000000103/3" : {
-      "interfaces" : [
-    {
-        "ips" : [ "10.0.2.254/24" ],
-        "mac" : "00:00:00:00:02:80",
-        "vlan": "-1"
-    }
-      ]
+  "ports" : {
+   "of:0000000000000011/1" : { "interfaces" : [ { "name" : "h1" } ] },
+   "of:0000000000000011/2" : { "interfaces" : [ { "name" : "h2" } ] },
+   "of:0000000000000012/1" : { "interfaces" : [ { "name" : "h3" } ] } ,
+   "of:0000000000000012/2" : { "interfaces" : [ { "name" : "h4" } ] },
+   "of:0000000000000013/1" : { "interfaces" : [ { "name" : "R-101" } ] }
   },
-  "of:0000000000000103/4" : {
-      "interfaces" : [
-    {
-        "ips" : [ "10.0.2.254/24" ],
-        "mac" : "00:00:00:00:02:80",
-        "vlan": "-1"
-    }
-      ]
-  }
-    },
-    
-    "devices" : {
-  "of:0000000000000001" : {
-      "basic" : {
-    "driver" : "ofdpa-cpqd"
-      },
-          "segmentrouting" : {
-                "name" : "Leaf-R1",
-                "nodeSid" : 101,
-                "routerIp" : "192.168.0.101",
-                "routerMac" : "00:00:00:00:01:80",
-                "isEdgeRouter" : true,
-                "adjacencySids" : []
-            }
-      },
-      "of:0000000000000002" : {
-      "basic" : {
-          "driver" : "ofdpa-cpqd"
-      },
-          "segmentrouting" : {
-                "name" : "Leaf-R2",
-                "nodeSid" : 102,
-                "routerIp" : "192.168.0.102",
-                "routerMac" : "00:00:00:00:02:80",
-                "isEdgeRouter" : true,
-                "adjacencySids" : []
-            }
-      },
-      "of:0000000000000191" : {
-            "basic" : {
-          "driver" : "ofdpa-cpqd"
-      },
-          "segmentrouting" : {
-                "name" : "Spine1",
-                "nodeSid" : 105,
-                "routerIp" : "192.168.0.105",
-                "routerMac" : "00:00:01:00:05:80",
-                "isEdgeRouter" : false,
-                "adjacencySids" : []
-            }
-      },
-  "of:0000000000000192" : {
-      "basic" : {
-          "driver" : "ofdpa-cpqd"
-      },
-      "segmentrouting" : {
-                "name" : "Spine2",
-                "nodeSid" : 106,
-                "routerIp" : "192.168.0.106",
-                "routerMac" : "00:00:01:00:06:80",
-                "isEdgeRouter" : false,
-                "adjacencySids" : []
-            }
+
+  "apps" : {
+    "org.onosproject.simplefabric" : {
+      "simpleFabric" : {
+        "l2Networks" : [
+         { "name" : "LEAF1", "interfaces" : ["h1", "h2" ],"l2Forward" : true },
+         { "name" : "LEAF2", "interfaces" : ["h3", "h4" ],"l2Forward" : true }
+         { "name" : "LEAF3", "interfaces" : ["R-101" ], "l2Forward" : true }
+        ],
+        "ipSubnets" : [
+           { "ipPrefix" : "10.1.100.0/24", "gatewayIp" : "10.0.1.1","gatewayMac" : "00:00:10:00:01:01", "l2NetworkName" : "LEAF1" },
+          { "ipPrefix" : "10.1.101.0/24", "gatewayIp" : "10.0.2.1","gatewayMac" : "00:00:10:00:02:01", "l2NetworkName" : "LEAF2" },
+          { "ipPrefix" : "10.1.102.0/24", "gatewayIp" : "10.0.3.1","gatewayMac" : "00:00:10:00:03:01", "l2NetworkName" : "LEAF3" }
+        ],
+        "borderRoutes" : [
+         { "ipPrefix" : "0.0.0.0/0", "nextHop" : "10.0.3.1" }
+        ]
       }
-    },
+    }
+  }
 
-    "hosts" : {
-        "00:00:00:00:00:01/-1" : {
-            "basic": {
-                "ips": ["10.0.1.1"],
-                "location": "of:0000000000000001/3"
-            }
-         },
-        "00:00:00:00:00:02/-1" : {
-            "basic": {
-                "ips": ["10.0.1.2"],
-                "location": "of:0000000000000001/4"
-            }
-         },
-        "00:00:00:00:00:03/-1" : {
-            "basic": {
-                "ips": ["10.0.2.1"],
-                "location": "of:0000000000000002/3"
-            }
-         },
-        "00:00:00:00:00:04/-1" : {
-            "basic": {
-                "ips": ["10.0.2.2"],
-                "location": "of:0000000000000002/4"
-            }
-         }
-    },
+}

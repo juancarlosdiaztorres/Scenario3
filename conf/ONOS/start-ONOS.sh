@@ -1,13 +1,11 @@
 #!/bin/bash
 
-export ONOS_APPS="drivers,openflow,netcfghostprovider,segmentrouting,fpm"
+export ONOS_APPS="drivers,openflow,segmentrouting"
 service onos start
 sleep 30
-/opt/onos/karaf/bin/client "app activate org.onosproject.lldpprovider"
+/opt/onos/karaf/bin/client "app activate org.onosproject.drivers"
 sleep 10
-/opt/onos/karaf/bin/client "app activate org.onosproject.openflow-base"
-sleep 10
-/opt/onos/karaf/bin/client "app activate org.onosproject.hostprovider"
+/opt/onos/karaf/bin/client "app activate org.onosproject.openflow"
 sleep 10
 /opt/onos/karaf/bin/client "app activate org.onosproject.segmentrouting"
 

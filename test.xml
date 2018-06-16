@@ -49,16 +49,12 @@ SPAIN
   <net name="Sw0" mode="openvswitch" hwaddr="00:00:00:00:01:00" controller='tcp:10.100.11.1:6633' of_version="OpenFlow13" fail_mode='secure' >
     <connection name='0_2' net='Sw2'></connection>
 	<connection name='0_3' net='Sw3'> </connection>
-<!--     <connection name='0_4' net='Sw4'> </connection>
-    <connection name='0_5' net='Sw5'> </connection> -->
   </net>
 
 
   <net name="Sw1" mode="openvswitch" hwaddr="00:00:00:00:01:01" controller='tcp:10.100.11.1:6633' of_version="OpenFlow13" fail_mode='secure' >
     <connection name='1_2' net='Sw2'></connection>
     <connection name='1_3' net='Sw3'></connection>
-  <!--   <connection name='1_4' net='Sw4'></connection>
-    <connection name='1_5' net='Sw5'> </connection> -->
   </net> 
 
   <net name="Sw2" mode="openvswitch" hwaddr="00:00:00:00:01:02" controller='tcp:10.100.11.1:6633' of_version="OpenFlow13" fail_mode='secure'>
@@ -67,11 +63,6 @@ SPAIN
   <net name="Sw3" mode="openvswitch" hwaddr="00:00:00:00:01:03" controller='tcp:10.100.11.1:6633' of_version="OpenFlow13" fail_mode='secure'>
   </net>
   
-  <!-- <net name="Sw4" mode="openvswitch" hwaddr="00:00:00:00:01:04" controller='tcp:10.100.11.1:6633' of_version="OpenFlow13" fail_mode='secure'>
-  </net>
-
-   <net name="Sw5" mode="openvswitch" hwaddr="00:00:00:00:01:05" controller='tcp:10.100.11.1:6633' of_version="OpenFlow13" fail_mode='secure'>
-  </net> -->
 
 
  <!-- ONOS -->
@@ -88,9 +79,7 @@ SPAIN
 	<!--<filetree seq="on_boot" root="/root/conf/">/home/coit/Desktop/TFG/conf/ONOS/</filetree>-->
 	 <!-- Copy configuration files -->
     <filetree seq="on_boot" root="/root/conf/">conf/ONOS/start-ONOS.sh</filetree>
-    <filetree seq="on_boot" root="/opt/onos/">conf/ONOS/options</filetree>
     <filetree seq="on_boot" root="/opt/onos/config/network-cfg.json">conf/ONOS/network-cfg.json</filetree>
-    <filetree seq="on_boot" root="/root/conf/">conf/ONOS/net-cfg.json</filetree>
     <filetree seq="on_boot" root="/root/conf/">conf/ONOS/config-ONOS_ipv4.sh</filetree>
 
 
@@ -101,32 +90,6 @@ SPAIN
     </exec>
     
 </vm>
-
-
-
-
-<!-- ROUTER -->
-<!-- ROUTER R101 -->
-<!--   <vm name="R-101" type="lxc" arch="x86_64">
-    <filesystem type="cow">/usr/share/vnx//filesystems/vnx_rootfs_lxc_ubuntu64-18.04-v025-onos-1.12.0</filesystem>
-    <if id="1" net="Sw4">
-      <ipv4>10.1.102.2/24</ipv4>
-    </if>
-    <if id="9" net="virbr0">
-      <ipv4>dhcp</ipv4>
-    </if>
-    Enable IP forwarding in this node
-    <forwarding type="ip"/>
-    <route type="ipv4" gw="10.1.102.1">10.1.100.0/24</route>   
-    <route type="ipv4" gw="10.1.102.1">10.1.101.0/24</route>   
-    <filetree seq="on_boot" root="/root/">conf/hosts</filetree>
-    <exec seq="on_boot" type="verbatim">
-        cat /root/hosts >> /etc/hosts;
-        rm /root/hosts;
-    </exec>
-</vm> -->
-
-
 
 
   <!-- NODES -->
@@ -181,32 +144,6 @@ SPAIN
         rm /root/hosts;
     </exec>
   </vm>
-<!-- 
-   <vm name="h5" type="lxc" arch="x86_64">
-    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-18.04-v025-onos-1.12.0</filesystem>
-    <if id="1" net="Sw5" >
-      <ipv4>10.1.103.11/24</ipv4>
-    </if>
-    <route type="ipv4" gw="10.1.103.1">default</route>   
-    <filetree seq="on_boot" root="/root/">conf/hosts</filetree>
-    <exec seq="on_boot" type="verbatim">
-        cat /root/hosts >> /etc/hosts;
-        rm /root/hosts;
-    </exec>
-  </vm>
-
-   <vm name="h6" type="lxc" arch="x86_64">
-    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-18.04-v025-onos-1.12.0</filesystem>
-    <if id="1" net="Sw5" >
-      <ipv4>10.1.103.12/24</ipv4>
-    </if>
-    <route type="ipv4" gw="10.1.103.1">default</route>   
-    <filetree seq="on_boot" root="/root/">conf/hosts</filetree>
-    <exec seq="on_boot" type="verbatim">
-        cat /root/hosts >> /etc/hosts;
-        rm /root/hosts;
-    </exec>
-  </vm> -->
 
   <host>
         <hostif net="Net_ctrl">
