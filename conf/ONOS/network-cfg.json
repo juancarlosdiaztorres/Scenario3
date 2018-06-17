@@ -3,16 +3,14 @@
 	"of:0000000000000102/3" : {
 	    "interfaces" : [
 		{
-		    "ips" : [ "10.1.100.1/24" ],
-		    "mac" : "00:00:00:00:01:80"
+		    "ips" : [ "10.1.100.1/24" ]
 		}
 	    ]
 	},
 	"of:0000000000000102/4" : {
 	    "interfaces" : [
 		{
-		    "ips" : [ "10.1.100.1/24" ],
-		    "mac" : "00:00:00:00:01:80"
+		    "ips" : [ "10.1.100.1/24" ]
 		}
 	    ]
 	},
@@ -20,16 +18,14 @@
 	"of:0000000000000103/3" : {
 	    "interfaces" : [
 		{
-		    "ips" : [ "10.1.101.1/24" ],
-		    "mac" : "00:00:00:00:02:80"
+		    "ips" : [ "10.1.101.1/24" ]
 		}
 	    ]
 	},
 	"of:0000000000000103/4" : {
 	    "interfaces" : [
 		{
-		    "ips" : [ "10.1.101.1/24" ],
-		    "mac" : "00:00:00:00:02:80"
+		    "ips" : [ "10.1.101.1/24" ]
 		}
 	    ]
 	}
@@ -38,7 +34,6 @@
     "devices" : {
 	"of:0000000000000100" : {
 	    "basic" : {
-		"driver" : "ofdpa-cpqd",
 		"name":"Sw0", "latitude":40,"longitude":-95
 	    },
     	    "segmentrouting" : {
@@ -52,7 +47,6 @@
     	},
     	"of:0000000000000101" : {
 	    "basic" : {
-	      	"driver" : "ofdpa-cpqd",
 	      	"name":"Sw1", "latitude":40,"longitude":-85
 	    },
     	    "segmentrouting" : {
@@ -66,7 +60,6 @@
     	},
     	"of:0000000000000102" : {
             "basic" : {
-	      	"driver" : "ofdpa-cpqd",
 	      	"name":"Sw2", "latitude":35,"longitude":-92
 	    },
     	    "segmentrouting" : {
@@ -80,7 +73,6 @@
     	},
 	"of:0000000000000103" : {
 	    "basic" : {
-	      	"driver" : "ofdpa-cpqd",
 	      	"name":"Sw3", "latitude":35,"longitude":-88
 	    },
 	    "segmentrouting" : {
