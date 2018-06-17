@@ -4,8 +4,7 @@
 	    "interfaces" : [
 		{
 		    "ips" : [ "10.1.100.1/24" ],
-		    "mac" : "00:00:00:00:01:80",
-		    "vlan": "-1"
+		    "mac" : "00:00:00:00:01:80"
 		}
 	    ]
 	},
@@ -13,8 +12,7 @@
 	    "interfaces" : [
 		{
 		    "ips" : [ "10.1.100.1/24" ],
-		    "mac" : "00:00:00:00:01:80",
-		    "vlan": "-1"
+		    "mac" : "00:00:00:00:01:80"
 		}
 	    ]
 	},
@@ -23,8 +21,7 @@
 	    "interfaces" : [
 		{
 		    "ips" : [ "10.1.101.1/24" ],
-		    "mac" : "00:00:00:00:02:80",
-		    "vlan": "-1"
+		    "mac" : "00:00:00:00:02:80"
 		}
 	    ]
 	},
@@ -32,8 +29,7 @@
 	    "interfaces" : [
 		{
 		    "ips" : [ "10.1.101.1/24" ],
-		    "mac" : "00:00:00:00:02:80",
-		    "vlan": "-1"
+		    "mac" : "00:00:00:00:02:80"
 		}
 	    ]
 	}
@@ -48,7 +44,7 @@
     	    "segmentrouting" : {
                 "name" : "Sw0",
                 "nodeSid" : 100,
-                "routerIp" : "192.168.0.101",
+                "routerIp" : "192.168.0.100",
                 "routerMac" : "00:00:00:00:01:80",
                 "isEdgeRouter" : false,
                 "adjacencySids" : []
@@ -62,7 +58,7 @@
     	    "segmentrouting" : {
                 "name" : "Sw1",
                 "nodeSid" : 101,
-                "routerIp" : "192.168.0.102",
+                "routerIp" : "192.168.0.101",
                 "routerMac" : "00:00:00:00:02:80",
                 "isEdgeRouter" : false,
                 "adjacencySids" : []
@@ -76,7 +72,7 @@
     	    "segmentrouting" : {
                 "name" : "Sw2",
                 "nodeSid" : 102,
-                "routerIp" : "192.168.0.105",
+                "routerIp" : "192.168.0.102",
                 "routerMac" : "00:00:01:00:05:80",
                 "isEdgeRouter" : true,
                 "adjacencySids" : []
@@ -90,7 +86,7 @@
 	    "segmentrouting" : {
                 "name" : "Sw3",
                 "nodeSid" : 103,
-                "routerIp" : "192.168.0.106",
+                "routerIp" : "192.168.0.103",
                 "routerMac" : "00:00:01:00:06:80",
                 "isEdgeRouter" : true,
                 "adjacencySids" : []

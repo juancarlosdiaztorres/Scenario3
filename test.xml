@@ -6,7 +6,7 @@
 Scenario1 VNX
 ~~~~~~~~~~~~~~~~~~~~
 
-Name:        Scenario1
+Name:        Scenario3
 Description: 	This is an easy configuration for the deployment of a SDN. 
 				The estructure is based on a Leaf-Spine configuration of OpenFlow switches. 
 				It allows to simulate a Software Defined DataCenter meanwhile getting started with ONOS Controller and SDN.
@@ -24,7 +24,7 @@ SPAIN
   xsi:noNamespaceSchemaLocation="/usr/share/xml/vnx/vnx-2.00.xsd">
   <global>
     <version>2.0</version>
-    <scenario_name>Scenario2</scenario_name>
+    <scenario_name>Scenario3</scenario_name>
     <automac offset="5"/>
     <vm_mgmt type="none" />
     <!--vm_mgmt type="private" network="10.250.0.0" mask="24" offset="16">

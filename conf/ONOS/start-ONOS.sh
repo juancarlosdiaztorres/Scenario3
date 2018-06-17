@@ -4,9 +4,9 @@ export ONOS_APPS="drivers,openflow,segmentrouting"
 service onos start
 sleep 30
 /opt/onos/karaf/bin/client "app activate org.onosproject.drivers"
-sleep 10
+sleep 30
 /opt/onos/karaf/bin/client "app activate org.onosproject.openflow"
-sleep 10
+sleep 30
 /opt/onos/karaf/bin/client "app activate org.onosproject.segmentrouting"
 
 # /opt/onos/karaf/bin/client "app activate org.onosproject.netcfghostprovider"
