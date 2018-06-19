@@ -34,7 +34,7 @@
     "devices" : {
 	"of:0000000000000100" : {
 	    "basic" : {
-		"name":"Sw0", "latitude":40,"longitude":-95
+		"name":"Sw0", "latitude":40,"longitude":-95, "driver": "ofdpa-ovs"
 	    },
     	    "segmentrouting" : {
                 "name" : "Sw0",
@@ -47,7 +47,7 @@
     	},
     	"of:0000000000000101" : {
 	    "basic" : {
-	      	"name":"Sw1", "latitude":40,"longitude":-85
+	      	"name":"Sw1", "latitude":40,"longitude":-85,"driver" : "ofdpa-ovs"
 	    },
     	    "segmentrouting" : {
                 "name" : "Sw1",
@@ -60,7 +60,7 @@
     	},
     	"of:0000000000000102" : {
             "basic" : {
-	      	"name":"Sw2", "latitude":35,"longitude":-92
+	      	"name":"Sw2", "latitude":35,"longitude":-92, "driver" : "ofdpa-ovs"
 	    },
     	    "segmentrouting" : {
                 "name" : "Sw2",
@@ -73,7 +73,7 @@
     	},
 	"of:0000000000000103" : {
 	    "basic" : {
-	      	"name":"Sw3", "latitude":35,"longitude":-88
+	      	"name":"Sw3", "latitude":35,"longitude":-88, "driver" : "ofdpa-ovs"
 	    },
 	    "segmentrouting" : {
                 "name" : "Sw3",
